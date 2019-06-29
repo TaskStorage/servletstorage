@@ -1,4 +1,4 @@
-package com.taskstorage.servletstorage;
+package com.taskstorage.servletstorage.CRUD;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ public class CreateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/taskJSP/createTask.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -23,10 +23,10 @@ public class CreateServlet extends HttpServlet {
             String content = request.getParameter("content");
             Task task = new Task(description, content);
             TaskDBWorker.create(task);
-            response.sendRedirect(request.getContextPath() + "/");
+            response.sendRedirect(request.getContextPath() + "/tasklist");
         } catch (Exception ex) {
 
-            getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/taskJSP/createTask.jsp").forward(request, response);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.taskstorage.servletstorage;
+package com.taskstorage.servletstorage.CRUD;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +18,7 @@ public class EditServlet extends HttpServlet {
             Task task = TaskDBWorker.selectOne(id);
             if (task != null) {
                 request.setAttribute("task", task);
-                getServletContext().getRequestDispatcher("/edit.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/taskJSP/editTask.jsp").forward(request, response);
             } else {
                 getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
             }
@@ -37,7 +37,7 @@ public class EditServlet extends HttpServlet {
 
             Task task = new Task(id, description, content);
             TaskDBWorker.update(task);
-            response.sendRedirect(request.getContextPath() + "/");
+            response.sendRedirect(request.getContextPath() + "/tasklist");
         } catch (Exception ex) {
 
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);

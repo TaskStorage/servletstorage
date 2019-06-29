@@ -28,5 +28,6 @@
         </tr>
     </c:forEach>
 </table>
+<p><a href='<c:url value="/" />'>Main</a></p>
 </body>
 </html>

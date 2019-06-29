@@ -1,4 +1,4 @@
-package com.taskstorage.servletstorage;
+package com.taskstorage.servletstorage.CRUD;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ public class DeleteServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(request.getParameter("id"));
             TaskDBWorker.delete(id);
-            response.sendRedirect(request.getContextPath() + "/");
+            response.sendRedirect(request.getContextPath() + "/tasklist");
         } catch (Exception ex) {
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
         }
