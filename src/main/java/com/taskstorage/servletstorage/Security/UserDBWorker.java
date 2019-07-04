@@ -21,7 +21,7 @@ public class UserDBWorker {
                     Long id = resultSet.getLong("id");
                     String username = resultSet.getString("username");
                     String password = resultSet.getString("password");
-                    User user = new User(id, username, password);
+                    User user = new User(id, username, password, Role.USER);
                     users.add(user);
                 }
             }
@@ -44,7 +44,7 @@ public class UserDBWorker {
                     if (resultSet.next()) {
                         String username = resultSet.getString("username");
                         String password = resultSet.getString("password");
-                        user = new User(id, username, password);
+                        user = new User(id, username, password, Role.USER);
                     }
                 }
             }
@@ -106,5 +106,54 @@ public class UserDBWorker {
             System.out.println(ex);
         }
         return 0;
+    }
+
+    public static User selectByUsername(String username, String password) {
+
+        User user = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(db_url, db_username, db_password)) {
+                String sql = "SELECT * FROM user WHERE username=?";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                    preparedStatement.setString(1, username);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if (resultSet.next()) {
+                        if (password.equals(resultSet.getString("password"))) {
+                            user = new User(resultSet.getLong("id"), username, password, Role.USER);
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return user;
+    }
+
+    public static boolean userIsExist(String username, String password) {
+        boolean result = false;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            try (Connection conn = DriverManager.getConnection(db_url, db_username, db_password)) {
+                String sql = "SELECT * FROM user WHERE username=?";
+                try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                    preparedStatement.setString(1, username);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if (resultSet.next()) {
+                        if (password.equals(resultSet.getString("password"))) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+
+    public static Role getRoleByLoginPassword(String username, String password) {
+        return Role.USER;
     }
 }

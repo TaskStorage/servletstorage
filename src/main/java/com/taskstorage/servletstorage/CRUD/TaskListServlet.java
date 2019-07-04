@@ -17,4 +17,8 @@ public class TaskListServlet extends HttpServlet {
 
         getServletContext().getRequestDispatcher("/taskJSP/listTask.jsp").forward(request, response);
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

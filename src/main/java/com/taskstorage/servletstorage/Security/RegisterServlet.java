@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
         try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            User user = new User(username, password);
+            User user = new User(username, password, Role.USER);
             UserDBWorker.create(user);
             response.sendRedirect(request.getContextPath() + "/userlist");
         } catch (Exception ex) {

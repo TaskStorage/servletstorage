@@ -1,31 +1,35 @@
 package com.taskstorage.servletstorage.Security;
 
-import java.io.Serializable;
+public class User {
 
-public class User implements Serializable {
-
-    private static final long serialVersionUID = 1L;
     private Long id;
     private String username;
     private String password;
+    private Role role;
 
     public User() {
 
     }
 
-    public User(String userName, String password) {
-        this.username = userName;
+    public User(String username, String password, Role role) {
+        this.username = username;
         this.password = password;
+        this.role = role;
     }
 
-    public User(Long id, String username, String password) {
+    public User(Long id, String username, String password, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -42,5 +46,13 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
