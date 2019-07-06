@@ -1,4 +1,7 @@
-package com.taskstorage.servletstorage.CRUD;
+package com.taskstorage.servletstorage.CRUD.controller;
+
+import com.taskstorage.servletstorage.CRUD.model.Task;
+import com.taskstorage.servletstorage.CRUD.repository.TaskRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +12,13 @@ import java.io.IOException;
 
 @WebServlet("/create")
 public class CreateServlet extends HttpServlet {
+
+    private TaskRepository taskRepository;
+
+    public CreateServlet() {
+        super();
+        taskRepository = new TaskRepository();
+    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -22,7 +32,7 @@ public class CreateServlet extends HttpServlet {
             String description = request.getParameter("description");
             String content = request.getParameter("content");
             Task task = new Task(description, content);
-            TaskDBWorker.create(task);
+            taskRepository.create(task);
             response.sendRedirect(request.getContextPath() + "/tasklist");
         } catch (Exception ex) {
 

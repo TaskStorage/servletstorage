@@ -1,4 +1,7 @@
-package com.taskstorage.servletstorage.CRUD;
+package com.taskstorage.servletstorage.CRUD.controller;
+
+import com.taskstorage.servletstorage.CRUD.model.Task;
+import com.taskstorage.servletstorage.CRUD.repository.TaskRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +14,15 @@ import java.util.ArrayList;
 @WebServlet("/tasklist")
 public class TaskListServlet extends HttpServlet {
 
+    private TaskRepository taskRepository;
+
+    public TaskListServlet() {
+        super();
+        taskRepository = new TaskRepository();
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Task> tasks = TaskDBWorker.selectAll();
+        ArrayList<Task> tasks = taskRepository.selectAll();
         request.setAttribute("tasks", tasks);
 
         getServletContext().getRequestDispatcher("/taskJSP/listTask.jsp").forward(request, response);
