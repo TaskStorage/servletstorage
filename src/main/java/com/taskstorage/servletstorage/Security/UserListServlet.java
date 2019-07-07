@@ -1,5 +1,8 @@
 package com.taskstorage.servletstorage.Security;
 
+import com.taskstorage.servletstorage.Security.model.User;
+import com.taskstorage.servletstorage.Security.repository.UserRepository;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +13,14 @@ import java.util.ArrayList;
 
 @WebServlet("/userlist")
 public class UserListServlet extends HttpServlet {
+    private UserRepository userRepository;
+
+    public UserListServlet() {
+        userRepository = new UserRepository();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<User> users = UserDBWorker.selectAll();
+        ArrayList<User> users = userRepository.selectAll();
         request.setAttribute("users", users);
 
         getServletContext().getRequestDispatcher("/userJSP/listUser.jsp").forward(request, response);

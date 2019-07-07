@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>User List</h2>
-<p><a href='<c:url value="/register" />'>Create new</a></p>
+<p><a href='<c:url value="/register"/>'>Create new</a></p>
 <table>
     <tr>
         <th>Username</th>
@@ -28,6 +28,6 @@
         </tr>
     </c:forEach>
 </table>
-<p><a href='<c:url value="/" />'>Main</a></p>
+<p><a href='<c:url value="/"/>'>Main</a></p>
 </body>
 </html>

@@ -1,5 +1,8 @@
 package com.taskstorage.servletstorage.Security;
 
+import com.taskstorage.servletstorage.Security.model.Role;
+import com.taskstorage.servletstorage.Security.repository.UserRepository;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +13,17 @@ import java.io.IOException;
 import static java.util.Objects.nonNull;
 
 @WebFilter("/tasklist")
+//@WebFilter("/*")
 public class AuthFilter implements Filter {
+//    private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
+//            Arrays.asList("", "/login", "/logout", "/register")));
+
+    private UserRepository userRepository;
+
+    public AuthFilter() {
+        userRepository = new UserRepository();
+    }
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -40,9 +53,9 @@ public class AuthFilter implements Filter {
             moveToMenu(req, res, role);
 
 
-        } else if (UserDBWorker.userIsExist(login, password)) {
+        } else if (userRepository.userIsExist(login, password)) {
 
-            final Role role = UserDBWorker.getRoleByLoginPassword(login, password);
+            final Role role = UserRepository.getRoleByLoginPassword(login, password);
 
             req.getSession().setAttribute("password", password);
             req.getSession().setAttribute("login", login);
@@ -51,7 +64,6 @@ public class AuthFilter implements Filter {
             moveToMenu(req, res, role);
 
         } else {
-
             moveToMenu(req, res, Role.UNKNOWN);
         }
     }

@@ -26,8 +26,8 @@ public class TaskRepository {
                 Task task = new Task(id, description, content);
                 tasks.add(task);
             }
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
         return tasks;
     }
@@ -39,13 +39,12 @@ public class TaskRepository {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM task WHERE id=?");
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             if (resultSet.next()) {
                 String description = resultSet.getString("description");
                 String content = resultSet.getString("content");
                 task = new Task(id, description, content);
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
         return task;
@@ -55,11 +54,9 @@ public class TaskRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO task (description, content) Values (?, ?)");
-
             preparedStatement.setString(1, task.getDescription());
             preparedStatement.setString(2, task.getContent());
             preparedStatement.executeUpdate();
-
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -69,14 +66,12 @@ public class TaskRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE task SET description = ?, content = ? WHERE id = ?");
-
             preparedStatement.setString(1, task.getDescription());
             preparedStatement.setString(2, task.getContent());
             preparedStatement.setLong(3, task.getId());
             preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -84,12 +79,10 @@ public class TaskRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM task WHERE id = ?");
-
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
     }
 }

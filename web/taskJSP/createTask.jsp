@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Create product</title>
+    <title>Create task</title>
 </head>
 <body>
 <h3>New task</h3>
