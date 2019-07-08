@@ -1,4 +1,4 @@
-package com.taskstorage.servletstorage.CRUD;
+package com.taskstorage.servletstorage.CRUD.model;
 
 import java.io.Serializable;
 

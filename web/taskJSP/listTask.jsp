@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>Tasks List</h2>
-<p><a href='<c:url value="/create" />'>Create new</a></p>
+<p><a href='<c:url value="?action=create"/>'>Create new</a></p>
 <table>
     <tr>
         <th>Description</th>
@@ -19,8 +19,8 @@
             <td>${task.description}</td>
             <td>${task.content}</td>
             <td>
-                <a href='<c:url value="/edit?id=${task.id}" />'>Edit</a> |
-                <form method="post" action='<c:url value="/delete" />' style="display:inline;">
+                <a href='<c:url value="?action=edit&id=${task.id}" />'>Edit</a> |
+                <form method="post" action='<c:url value="?action=delete"/>' style="display:inline;">
                     <input type="hidden" name="id" value="${task.id}">
                     <input type="submit" value="Delete">
                 </form>
@@ -28,6 +28,6 @@
         </tr>
     </c:forEach>
 </table>
-<p><a href='<c:url value="/" />'>Main</a></p>
+<p><a href='<c:url value="/"/>'>Main</a></p>
 </body>
 </html>
