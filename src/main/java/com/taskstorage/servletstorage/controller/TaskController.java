@@ -1,7 +1,7 @@
-package com.taskstorage.servletstorage.CRUD.controller;
+package com.taskstorage.servletstorage.controller;
 
-import com.taskstorage.servletstorage.CRUD.model.Task;
-import com.taskstorage.servletstorage.CRUD.repository.TaskRepository;
+import com.taskstorage.servletstorage.model.Task;
+import com.taskstorage.servletstorage.repository.TaskRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

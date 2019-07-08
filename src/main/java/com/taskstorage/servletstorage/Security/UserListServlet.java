@@ -1,7 +1,7 @@
 package com.taskstorage.servletstorage.Security;
 
-import com.taskstorage.servletstorage.Security.model.User;
-import com.taskstorage.servletstorage.Security.repository.UserRepository;
+import com.taskstorage.servletstorage.model.User;
+import com.taskstorage.servletstorage.repository.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

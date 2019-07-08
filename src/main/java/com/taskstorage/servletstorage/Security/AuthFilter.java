@@ -1,7 +1,7 @@
 package com.taskstorage.servletstorage.Security;
 
-import com.taskstorage.servletstorage.Security.model.Role;
-import com.taskstorage.servletstorage.Security.repository.UserRepository;
+import com.taskstorage.servletstorage.model.Role;
+import com.taskstorage.servletstorage.repository.UserRepository;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

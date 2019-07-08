@@ -1,4 +1,4 @@
-package com.taskstorage.servletstorage.Security.model;
+package com.taskstorage.servletstorage.model;
 
 public class User {
 

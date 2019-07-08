@@ -1,8 +1,7 @@
-package com.taskstorage.servletstorage.Security.repository;
+package com.taskstorage.servletstorage.repository;
 
-import com.taskstorage.servletstorage.ConnectorFactory;
-import com.taskstorage.servletstorage.Security.model.Role;
-import com.taskstorage.servletstorage.Security.model.User;
+import com.taskstorage.servletstorage.model.Role;
+import com.taskstorage.servletstorage.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
