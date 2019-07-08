@@ -26,6 +26,10 @@ public class AuthFilter implements Filter {
     }
 
     @Override
+    public void destroy() {
+    }
+
+    @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
             throws IOException, ServletException {
 
@@ -37,25 +41,25 @@ public class AuthFilter implements Filter {
 
         final HttpSession session = req.getSession();
 
-        //Logged user.
+        //Logged user - grab data from session.
         if (nonNull(session) &&
                 nonNull(session.getAttribute("login")) &&
                 nonNull(session.getAttribute("password"))) {
 
-            final Role role = (Role) session.getAttribute("role");
+            final Role role = Role.valueOf(session.getAttribute("role").toString());
 
             moveToMenu(req, res, role, filterChain);
-
+            //Not logged user but exist (redirect from /userJSP/login.jsp)
         } else if (userRepository.userIsExist(login, password)) {
 
-            final Role role = UserRepository.getRoleByLoginPassword(login, password);
+            final Role role = userRepository.getRoleByLogin(login);
 
             req.getSession().setAttribute("password", password);
             req.getSession().setAttribute("login", login);
-            req.getSession().setAttribute("role", role);
+            req.getSession().setAttribute("role", role.name());
 
             moveToMenu(req, res, role, filterChain);
-
+            //Before login
         } else {
             moveToMenu(req, res, Role.UNKNOWN, filterChain);
         }
@@ -63,24 +67,25 @@ public class AuthFilter implements Filter {
 
     /**
      * Move user to menu.
-     * If access 'admin' move to admin menu.
-     * If access 'user' move to user menu.
+     * If access 'admin' move anywhere.
+     * If access 'user' move to tasks.
+     * If user try to access wrong page - display "notfound"
      */
     private void moveToMenu(final HttpServletRequest req,
                             final HttpServletResponse res,
                             final Role role, FilterChain filterChain)
             throws ServletException, IOException {
 
-
-        if (role.equals(Role.USER)) {
-//            req.getRequestDispatcher("/tasklist").forward(req, res);
+        if (role.equals(Role.ADMIN)) {
             filterChain.doFilter(req, res);
+        } else if (role.equals(Role.USER) && req.getServletPath().equals("/tasklist")) {
+            req.getRequestDispatcher("/tasklist").forward(req, res);
+        } else if (role.equals(Role.USER)) {
+            //If user try to access wrong page
+            req.getRequestDispatcher("/notfound.jsp").forward(req, res);
         } else {
+            //If not USER / ADMIN -> UNKNOWN -> Login
             req.getRequestDispatcher("/userJSP/login.jsp").forward(req, res);
         }
-    }
-
-    @Override
-    public void destroy() {
     }
 }

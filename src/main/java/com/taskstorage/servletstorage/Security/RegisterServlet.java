@@ -34,9 +34,8 @@ public class RegisterServlet extends HttpServlet {
             String password = request.getParameter("password");
             User user = new User(username, password, Role.USER);
             userRepository.create(user);
-            response.sendRedirect(request.getContextPath() + "/userlist");
+            response.sendRedirect(request.getContextPath() + "/");
         } catch (Exception ex) {
-
             getServletContext().getRequestDispatcher("/userJSP/register.jsp").forward(request, response);
         }
     }

@@ -1,4 +1,4 @@
-package com.taskstorage.servletstorage.Security.repository;
+package com.taskstorage.servletstorage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

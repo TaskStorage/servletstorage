@@ -1,6 +1,7 @@
 package com.taskstorage.servletstorage.CRUD.repository;
 
 import com.taskstorage.servletstorage.CRUD.model.Task;
+import com.taskstorage.servletstorage.ConnectorFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
