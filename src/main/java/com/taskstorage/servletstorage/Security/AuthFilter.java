@@ -12,11 +12,8 @@ import java.io.IOException;
 
 import static java.util.Objects.nonNull;
 
-@WebFilter("/tasklist")
-//@WebFilter("/*")
+@WebFilter(urlPatterns = {"/tasklist/*", "/userlist/*"})
 public class AuthFilter implements Filter {
-//    private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-//            Arrays.asList("", "/login", "/logout", "/register")));
 
     private UserRepository userRepository;
 
@@ -29,10 +26,7 @@ public class AuthFilter implements Filter {
     }
 
     @Override
-    public void doFilter(final ServletRequest request,
-                         final ServletResponse response,
-                         final FilterChain filterChain)
-
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
             throws IOException, ServletException {
 
         final HttpServletRequest req = (HttpServletRequest) request;
@@ -50,8 +44,7 @@ public class AuthFilter implements Filter {
 
             final Role role = (Role) session.getAttribute("role");
 
-            moveToMenu(req, res, role);
-
+            moveToMenu(req, res, role, filterChain);
 
         } else if (userRepository.userIsExist(login, password)) {
 
@@ -61,10 +54,10 @@ public class AuthFilter implements Filter {
             req.getSession().setAttribute("login", login);
             req.getSession().setAttribute("role", role);
 
-            moveToMenu(req, res, role);
+            moveToMenu(req, res, role, filterChain);
 
         } else {
-            moveToMenu(req, res, Role.UNKNOWN);
+            moveToMenu(req, res, Role.UNKNOWN, filterChain);
         }
     }
 
@@ -75,18 +68,17 @@ public class AuthFilter implements Filter {
      */
     private void moveToMenu(final HttpServletRequest req,
                             final HttpServletResponse res,
-                            final Role role)
+                            final Role role, FilterChain filterChain)
             throws ServletException, IOException {
 
 
         if (role.equals(Role.USER)) {
-            req.getRequestDispatcher("/tasklist").forward(req, res);
-
+//            req.getRequestDispatcher("/tasklist").forward(req, res);
+            filterChain.doFilter(req, res);
         } else {
             req.getRequestDispatcher("/userJSP/login.jsp").forward(req, res);
         }
     }
-
 
     @Override
     public void destroy() {
