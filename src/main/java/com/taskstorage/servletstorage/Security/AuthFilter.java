@@ -1,6 +1,7 @@
 package com.taskstorage.servletstorage.Security;
 
 import com.taskstorage.servletstorage.model.Role;
+import com.taskstorage.servletstorage.model.User;
 import com.taskstorage.servletstorage.repository.UserRepository;
 
 import javax.servlet.*;
@@ -36,40 +37,42 @@ public class AuthFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
 
-        final String login = req.getParameter("login");
+        final String username = req.getParameter("username");
         final String password = req.getParameter("password");
 
         final HttpSession session = req.getSession();
 
-        //Logged user - grab data from session.
+        User user;
+
+        //3. Logged user - grab data from session.
         if (nonNull(session) &&
-                nonNull(session.getAttribute("login")) &&
+                nonNull(session.getAttribute("username")) &&
                 nonNull(session.getAttribute("password"))) {
 
             final Role role = Role.valueOf(session.getAttribute("role").toString());
 
             moveToMenu(req, res, role, filterChain);
-            //Not logged user but exist (redirect from /userJSP/login.jsp)
-        } else if (userRepository.userIsExist(login, password)) {
+            //2. Retrive data from login.jsp (req.getParameter("username")...) and store to session -> redirect to destination
+        } else if ((user = userRepository.selectByUsername(username)) != null && user.getPassword().equals(password)) {
 
-            final Role role = userRepository.getRoleByLogin(login);
+            final Role role = user.getRole();
 
-            req.getSession().setAttribute("password", password);
-            req.getSession().setAttribute("login", login);
-            req.getSession().setAttribute("role", role.name());
+            req.getSession().setAttribute("password", user.getPassword());
+            req.getSession().setAttribute("username", user.getUsername());
+            req.getSession().setAttribute("role", user.getRole().name());
 
             moveToMenu(req, res, role, filterChain);
-            //Before login
+            //1. Not logged - go to login.jsp
         } else {
             moveToMenu(req, res, Role.UNKNOWN, filterChain);
         }
     }
 
     /**
-     * Move user to menu.
      * If access 'admin' move anywhere.
      * If access 'user' move to tasks.
      * If user try to access wrong page - display "notfound"
+     * If not logged - move to login.jsp
      */
     private void moveToMenu(final HttpServletRequest req,
                             final HttpServletResponse res,

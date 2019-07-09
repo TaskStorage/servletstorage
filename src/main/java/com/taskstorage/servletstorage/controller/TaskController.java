@@ -74,7 +74,7 @@ public class TaskController extends HttpServlet {
         if (request.getMethod().equals("GET")) {
             try {
                 Long id = Long.parseLong(request.getParameter("id"));
-                Task task = taskRepository.selectOne(id);
+                Task task = taskRepository.selectById(id);
                 if (task != null) {
                     request.setAttribute("task", task);
                     getServletContext().getRequestDispatcher("/taskJSP/editTask.jsp").forward(request, response);
@@ -100,7 +100,6 @@ public class TaskController extends HttpServlet {
     }
 
     private void deleteTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getMethod().equals("POST")) {
             try {
                 Long id = Long.parseLong(request.getParameter("id"));
                 taskRepository.delete(id);
@@ -108,10 +107,6 @@ public class TaskController extends HttpServlet {
             } catch (Exception ex) {
                 getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
             }
-        } else {
-            notFound(request, response);
-        }
-
     }
 
     private void notFound(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
