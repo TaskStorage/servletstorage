@@ -57,6 +57,7 @@ public class AuthFilter implements Filter {
 
             final Role role = user.getRole();
 
+            req.getSession().setAttribute("currentUserId", user.getId());
             req.getSession().setAttribute("password", user.getPassword());
             req.getSession().setAttribute("username", user.getUsername());
             req.getSession().setAttribute("role", user.getRole().name());

@@ -32,7 +32,6 @@
                 <a class="nav-link" href="/userlist">User list</a>
             </li>
         </ul>
-        <a href="/login" class="btn btn-primary btn-sm">Login</a>
         <a href="/register" class="btn btn-primary btn-sm ml-1">Register</a>
     </div>
 </nav>
@@ -40,6 +39,7 @@
 <p><a href="/tasklist">Tasks</a></p>
 <p><a href="/userlist">User List</a></p>
 <p><a href="/register">Register</a></p>
+<p><a href="/logout">Logout</a></p>
 </body>
 <footer class="page-footer font-small fixed-bottom bg-dark">
     <div class="footer-copyright text-center text-light py-3">© 2019</div>

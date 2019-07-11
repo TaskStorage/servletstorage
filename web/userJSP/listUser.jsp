@@ -29,6 +29,8 @@
         </tr>
     </c:forEach>
 </table>
+<div>Curredt user id - ${currentUserId}</div>
+<p><a href='<c:url value="/logout"/>'>Logout</a></p>
 <p><a href='<c:url value="/"/>'>Main</a></p>
 </body>
 </html>
