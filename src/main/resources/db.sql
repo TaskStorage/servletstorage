@@ -11,9 +11,9 @@ create table IF NOT EXISTS task
 
 create table IF NOT EXISTS user
 (
-  id       bigint       not null auto_increment,
-  username varchar(255) not null,
-  password varchar(255) not null,
-  role     varchar(255) not null,
+  id       bigint      not null auto_increment,
+  username varchar(64) not null unique,
+  password varchar(64) not null,
+  role     varchar(64) not null,
   primary key (id)
 ) engine = MyISAM;

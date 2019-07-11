@@ -12,7 +12,7 @@
     <h1>Вход в систему</h1><br>
     <form method="post" action="">
 
-        <input type="text" required placeholder="login" name="login"><br>
+        <input type="text" required placeholder="username" name="username"><br>
         <input type="password" required placeholder="password" name="password"><br><br>
         <input class="button" type="submit" value="Войти">
 

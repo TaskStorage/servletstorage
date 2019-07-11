@@ -32,7 +32,7 @@ public class TaskRepository {
         return tasks;
     }
 
-    public Task selectOne(Long id) {
+    public Task selectById(Long id) {
 
         Task task = null;
         try {

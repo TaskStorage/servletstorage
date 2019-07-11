@@ -96,7 +96,7 @@ public class UserRepository {
         }
     }
 
-    public User selectByUsername(String username, String password) {
+    public User selectByUsername(String username) {
 
         User user = null;
         try {
@@ -105,47 +105,14 @@ public class UserRepository {
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                if (password.equals(resultSet.getString("password"))) {
-                    user = new User(resultSet.getLong("id"), username, password, Role.valueOf(resultSet.getString("role")));
-                }
+                user = new User(resultSet.getLong("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        Role.valueOf(resultSet.getString("role")));
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
         return user;
-    }
-
-    public boolean userIsExist(String username, String password) {
-        boolean result = false;
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM user WHERE username=?");
-            preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                if (password.equals(resultSet.getString("password"))) {
-                    return true;
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        return false;
-    }
-
-    public Role getRoleByLogin(String username) {
-
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM user WHERE username=?");
-            preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return Role.valueOf(resultSet.getString("role"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Role.UNKNOWN;
     }
 }
