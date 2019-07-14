@@ -19,6 +19,7 @@
                 <a class="nav-link" href="/userlist">User list</a>
             </li>
         </ul>
+        <a href="/login" class="btn btn-primary btn-sm ml-1">Login</a>
         <a href="/register" class="btn btn-primary btn-sm ml-1">Register</a>
     </div>
 </nav>

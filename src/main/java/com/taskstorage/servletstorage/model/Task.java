@@ -8,8 +8,8 @@ public class Task implements Serializable {
     private Long id;
     private String description;
     private String content;
-
     private Long author;
+
     public Task() {
     }
 
