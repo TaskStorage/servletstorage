@@ -23,7 +23,9 @@ public class TaskRepository {
                 Long id = resultSet.getLong("id");
                 String description = resultSet.getString("description");
                 String content = resultSet.getString("content");
-                Task task = new Task(id, description, content);
+                Long user_id = resultSet.getLong("user_id");
+
+                Task task = new Task(id, description, content, user_id);
                 tasks.add(task);
             }
         } catch (SQLException ex) {
@@ -42,7 +44,9 @@ public class TaskRepository {
             if (resultSet.next()) {
                 String description = resultSet.getString("description");
                 String content = resultSet.getString("content");
-                task = new Task(id, description, content);
+                Long user_id = resultSet.getLong("user_id");
+
+                task = new Task(id, description, content, user_id);
             }
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -53,9 +57,10 @@ public class TaskRepository {
     public void create(Task task) {
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO task (description, content) Values (?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO task (description, content, user_id) Values (?, ?, ?)");
             preparedStatement.setString(1, task.getDescription());
             preparedStatement.setString(2, task.getContent());
+            preparedStatement.setLong(3, task.getAuthor());
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             System.out.println(ex);

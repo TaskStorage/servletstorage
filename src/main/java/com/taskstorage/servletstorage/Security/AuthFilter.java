@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import static java.util.Objects.nonNull;
 
-@WebFilter(urlPatterns = {"/tasklist/*", "/userlist/*"})
+@WebFilter(urlPatterns = {"/tasklist/*", "/userlist/*", "/login"})
 public class AuthFilter implements Filter {
 
     private UserRepository userRepository;
@@ -57,6 +57,7 @@ public class AuthFilter implements Filter {
 
             final Role role = user.getRole();
 
+            req.getSession().setAttribute("currentUserId", user.getId());
             req.getSession().setAttribute("password", user.getPassword());
             req.getSession().setAttribute("username", user.getUsername());
             req.getSession().setAttribute("role", user.getRole().name());
@@ -79,13 +80,18 @@ public class AuthFilter implements Filter {
                             final Role role, FilterChain filterChain)
             throws ServletException, IOException {
 
-        if (role.equals(Role.ADMIN)) {
+        if (role.equals(Role.ADMIN) && !req.getServletPath().equals("/login")) {
             filterChain.doFilter(req, res);
-        } else if (role.equals(Role.USER) && req.getServletPath().equals("/tasklist")) {
-            req.getRequestDispatcher("/tasklist").forward(req, res);
+        } else if (role.equals(Role.ADMIN)) {
+//            req.getRequestDispatcher("/main").forward(req, res);
+            res.sendRedirect("/");
+        } else if (role.equals(Role.USER) && req.getServletPath().equals("/userlist")) {
+            //If user try to access secured page
+            req.getRequestDispatcher("/restricted.jsp").forward(req, res);
+        } else if (role.equals(Role.USER) && req.getServletPath().equals("/login")) {
+            res.sendRedirect("/");
         } else if (role.equals(Role.USER)) {
-            //If user try to access wrong page
-            req.getRequestDispatcher("/notfound.jsp").forward(req, res);
+            filterChain.doFilter(req, res);
         } else {
             //If not USER / ADMIN -> UNKNOWN -> Login
             req.getRequestDispatcher("/userJSP/login.jsp").forward(req, res);

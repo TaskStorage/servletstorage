@@ -61,7 +61,11 @@ public class TaskController extends HttpServlet {
             try {
                 String description = request.getParameter("description");
                 String content = request.getParameter("content");
-                Task task = new Task(description, content);
+
+                Long currentUser = (Long) request.getSession().getAttribute("currentUserId");
+
+                Task task = new Task(description, content, currentUser);
+
                 taskRepository.create(task);
                 response.sendRedirect(request.getContextPath() + "/tasklist");
             } catch (Exception ex) {
@@ -90,7 +94,10 @@ public class TaskController extends HttpServlet {
                 String description = request.getParameter("description");
                 String content = request.getParameter("content");
 
-                Task task = new Task(id, description, content);
+                Long currentUser = (Long) request.getSession().getAttribute("currentUserId");
+
+                Task task = new Task(id, description, content, currentUser);
+
                 taskRepository.update(task);
                 response.sendRedirect(request.getContextPath() + "/tasklist");
             } catch (Exception ex) {

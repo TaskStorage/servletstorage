@@ -3,58 +3,58 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Task Storage</title>
-</head>
+<%@include file="/parts/head.jsp" %>
 <body>
+<%@include file="/parts/navbar.jsp" %>
+<div class="container mb-5 mt-3">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand text-white" href="/">
-        <img src="/static/logo.png" width="50" height="30" class="d-inline-block align-left" alt=""/>
-        TaskStorage
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/tasklist">Tasks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/userlist">User list</a>
-            </li>
-        </ul>
-        <a href="/login" class="btn btn-primary btn-sm">Login</a>
-        <a href="/register" class="btn btn-primary btn-sm ml-1">Register</a>
+    <h5>Hello, guest</h5>
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lobortis erat ac nulla porta elementum. Vestibulum
+        malesuada auctor enim, ac tempor ex convallis quis.
+        Morbi ac lorem viverra, eleifend nulla quis, suscipit nisi. Vivamus finibus, nunc nec cursus tristique, nisl
+        nisl bibendum elit, et tempor ante ex vitae quam.
+        In facilisis convallis nibh at sodales. Etiam sit amet enim neque. Aenean ante elit, sagittis vel vulputate
+        quis, condimentum a purus.
+        Ut sit amet nisi lacus. Nunc orci elit, aliquam at dolor ut, accumsan dictum elit.
     </div>
-</nav>
+    <div>
+        Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis tempus tincidunt placerat.
+        Maecenas molestie gravida dignissim. In nec viverra ipsum. Mauris hendrerit orci enim, vitae placerat sem semper
+        quis.
+        In sed viverra odio, eget efficitur elit. Nullam a dapibus enim, eu rutrum dolor. Pellentesque sit amet turpis
+        orci.
+        Integer nec nunc id nisi rutrum molestie vel vel mauris. In est odio, imperdiet a scelerisque vel, molestie eu
+        ipsum.
+        Maecenas malesuada, sapien porta posuere tristique, velit magna ornare lacus, nec interdum est leo porttitor
+        nisi.
+        Sed condimentum augue ac mauris elementum aliquam. Mauris semper ante non neque feugiat pretium.
+        Vestibulum tempor, justo euismod maximus suscipit, orci purus commodo lorem, in congue nulla nunc sit amet
+        ipsum.
+    </div>
+    <div>
+        Mauris aliquam est non nisl maximus porta. Fusce at ante fringilla, varius felis a, posuere mi.
+        Maecenas egestas quam leo, vitae imperdiet nisi vehicula ut. Nullam semper velit et dui egestas vulputate.
+        Fusce eget ligula sed est dignissim tempor. Nulla facilisi. Nunc at augue sapien. Nunc semper elementum lorem
+        eget eleifend.
+        Morbi venenatis maximus metus quis semper. Pellentesque in lorem malesuada, pellentesque justo sit amet, egestas
+        ligula.
+    </div>
+    <div>
+        Vivamus sit amet ex eget ligula euismod convallis. Nullam ultrices nisi sed nisi mollis auctor.
+        Proin faucibus ante interdum cursus convallis. Nunc justo leo, aliquam at orci et, egestas blandit libero.
+        Phasellus gravida magna eget arcu rhoncus efficitur at id ligula. Integer nunc leo, ultrices et tortor a, varius
+        consequat odio.
+        Donec eget tortor convallis, consectetur metus non, posuere dui. Aenean facilisis quam leo, vitae auctor eros
+        malesuada quis.
+        Cras quis lacus lacus. Nunc non sapien sodales, dictum neque vitae, faucibus felis. Maecenas id mauris vitae
+        augue aliquam rhoncus.
+        Praesent finibus luctus viverra. In pretium sollicitudin velit id semper. Sed turpis ante, scelerisque aliquam
+        hendrerit sed, hendrerit mattis lacus.
+        Aenean velit diam, pellentesque ut lectus sit amet, mollis rutrum tellus.
+    </div>
 
-<p><a href="/tasklist">Tasks</a></p>
-<p><a href="/userlist">User List</a></p>
-<p><a href="/register">Register</a></p>
+</div>
+<%@include file="/parts/footer.jsp" %>
 </body>
-<footer class="page-footer font-small fixed-bottom bg-dark">
-    <div class="footer-copyright text-center text-light py-3">© 2019</div>
-</footer>
-<!-- Bootstrap -->
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<!-- /Bootstrap -->
 </html>

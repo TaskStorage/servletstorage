@@ -6,11 +6,9 @@
 <body>
 <%@include file="parts/navbar.jsp" %>
 <div class="container mb-5 mt-3">
-
     <div class="text-center">
-        <img src="/static/404.png">
+        <img src="/static/403.png">
     </div>
-
 </div>
 <%@include file="parts/footer.jsp" %>
 </body>

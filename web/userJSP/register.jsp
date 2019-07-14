@@ -1,17 +1,31 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-</head>
+<%@include file="/parts/head.jsp" %>
 <body>
-<h3>Welcome, fill the form</h3>
-<form method="post" action="/register">
-    <label>Login</label><br>
-    <input name="username"/><br><br>
-    <label>Password</label><br>
-    <input type="password" name="password"/><br><br>
-    <input type="submit" value="Save"/>
-</form>
+<%@include file="/parts/navbar.jsp" %>
+<div class="container mb-5 mt-3">
+    <div class="form-group mt-3">
+        <form method="post" action="/register">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">User Name:</label>
+                <div class="col-sm-5">
+                    <input type="text" name="username" required placeholder="username" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Password:</label>
+                <div class="col-sm-5">
+                    <input type="password" name="password" required placeholder="password" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+<%@include file="/parts/footer.jsp" %>
 </body>
 </html>
