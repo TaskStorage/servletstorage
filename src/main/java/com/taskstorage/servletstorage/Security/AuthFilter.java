@@ -83,13 +83,12 @@ public class AuthFilter implements Filter {
         if (role.equals(Role.ADMIN) && !req.getServletPath().equals("/login")) {
             filterChain.doFilter(req, res);
         } else if (role.equals(Role.ADMIN)) {
-//            req.getRequestDispatcher("/main").forward(req, res);
-            res.sendRedirect("/");
+            res.sendRedirect(req.getContextPath()+"/");
         } else if (role.equals(Role.USER) && req.getServletPath().equals("/userlist")) {
             //If user try to access secured page
             req.getRequestDispatcher("/restricted.jsp").forward(req, res);
         } else if (role.equals(Role.USER) && req.getServletPath().equals("/login")) {
-            res.sendRedirect("/");
+            res.sendRedirect(req.getContextPath()+"/");
         } else if (role.equals(Role.USER)) {
             filterChain.doFilter(req, res);
         } else {

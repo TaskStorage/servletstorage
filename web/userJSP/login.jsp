@@ -7,7 +7,7 @@
 <%@include file="/parts/navbar.jsp" %>
 <div class="container mb-5 mt-3">
     <div class="form-group mt-3">
-        <form method="post">
+        <form method="post" value='<c:url value="/"/>'>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">User Name:</label>
                 <div class="col-sm-5">
