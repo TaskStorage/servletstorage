@@ -1,6 +1,5 @@
 package com.taskstorage.servletstorage.repository;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -8,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectorFactory {
+class ConnectorFactory {
     private static Connection connection = null;
 
     public static Connection getConnection() {
@@ -25,13 +24,7 @@ public class ConnectorFactory {
                 String password = prop.getProperty("db_password");
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, password);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (SQLException | ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }
             return connection;
