@@ -52,7 +52,7 @@ public class AuthFilter implements Filter {
             final Role role = Role.valueOf(session.getAttribute("role").toString());
 
             moveToMenu(req, res, role, filterChain);
-        //2. Retrive data from login.jsp (req.getParameter("username")...) and store to session -> redirect to destination
+        //2. Retrieve data from login.jsp (req.getParameter("username")...) and store to session -> redirect to destination
         } else if ((user = userRepository.selectByUsername(username)) != null && user.getPassword().equals(password)) {
 
             final Role role = user.getRole();
